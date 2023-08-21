@@ -66,5 +66,5 @@ public:
 
     void setRegisterValue(int regNumber, uint16_t value);
 
-    int16_t convert2SComplement(uint8_t value);
+    int16_t convert2SComplement(int8_t value);
 };
