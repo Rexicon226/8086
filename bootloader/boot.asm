@@ -1,20 +1,14 @@
-org 0xFE000
-
 bits 16
-cpu 8086
+
+org 0x7C00
 
 _start:
-    xor ax, ax      ; Clear AX register (AX = 0)
-    mov bx, 5       ; Set BX to 5
-    add ax, bx      ; Add BX to AX (AX = 5)
+    xor ax, ax
+    jmp loop
 
-    cmp ax, bx      ; Compare AX and BX
-    je equal        ; Jump if equal (ZF flag set)
-    hlt             ; Halt
-
-end:
+exit:
     hlt
 
-equal:
-    add ax, 1       ; Add 1 to AX
-    jmp end
+loop:
+    add ax, 0x1
+    jmp exit

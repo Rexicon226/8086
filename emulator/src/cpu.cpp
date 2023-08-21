@@ -89,12 +89,18 @@ void CPU::setRegisterValue(int regNumber, uint16_t value) {
     }
 }
 
-int16_t CPU::convert2SComplement(uint8_t value) {
+int16_t CPU::convert2SComplement(int8_t value) {
+    int16_t convertedValue;
+    convertedValue = value;
     if (value & 0x80) {
-        value = ~value + 1;
+        convertedValue = ~convertedValue + 1;
+        convertedValue = -convertedValue;
+    }
+    else {
+        convertedValue = value;
     }
 
-    return -6;
+    return convertedValue;
 }
 
 void CPU::run() {
@@ -290,7 +296,6 @@ void CPU::run() {
             case 0x74: // JE
                 value = memory[ip];
                 ip++;
-
                 int16_t convertedValue2;
                 convertedValue2 = convert2SComplement(value);
 
@@ -483,6 +488,7 @@ void CPU::run() {
 
             case 0xEB: // JMP
                 value = memory[ip];
+                ip++;
                 int16_t convertedValue;
                 convertedValue = convert2SComplement(value);
 
